@@ -25,12 +25,17 @@ class AppModel {
         printContent();
     }
 
+
+    updateSingleValueField(String value ) => singleFieldValue = value; 
+
+    updateFormEntry(int index, String value) => formEntries[index].content = value;
+
     void printContent()
     {
-       print("Single TextField: $singleFieldValue");
-       print("\n");
+        print("Single TextField: $singleFieldValue");
+        print("\n");
 
-       formEntries.forEach((entry)=> print("Field: ${entry.title} - Content: ${entry.content}"));
-       print(" ");
+        formEntries.forEach((entry)=> print("Field: ${entry.title} - Content: ${entry.content}"));
+        print(" ");
     }
 }

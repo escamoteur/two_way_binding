@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
+// by Simon Lightfoot https://gist.github.com/slightfoot
+
 typedef Widget EnsureVisibleBuilder(BuildContext context, FocusNode focusNode);
 
 class EnsureVisible extends StatefulWidget {

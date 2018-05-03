@@ -47,14 +47,12 @@ class MainPage extends StatelessWidget {
                         
                           TextField(focusNode: focusNode,
                             controller: TextEditingController(
-                                text: ModelProvider
-                                    .of(context)
-                                    .formEntries[index]
-                                    .content),
+                                text: ModelProvider.of(context).formEntries[index].content),
                             // because a new lambda function is created for each item, it can capture the current value of index
-                            onChanged: (newValue) => ModelProvider
-                                .of(context)
-                                .updateFormEntry(index, newValue),
+                            onChanged: (newValue) {
+                              print(object)
+                              ModelProvider.of(context).updateFormEntry(index, newValue);
+                            },
                           )
                         ],
                       ),)

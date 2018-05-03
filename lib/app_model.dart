@@ -29,7 +29,7 @@ class AppModel {
     updateSingleValueField(String value ) => singleFieldValue = value; 
 
     updateFormEntry(int index, String value) {
-      print("Udated Field index: $index: $value");
+      print("Updated Field index: $index: $value");
       return formEntries[index].content = value;
     }
 

@@ -4,14 +4,7 @@ import 'package:two_way_binding/model_provider.dart';
 
 
 
-
-
-
-
-
 class MainPage extends StatelessWidget {
-  
-  
   
   @override
   Widget build(BuildContext context) {
@@ -42,7 +35,9 @@ class MainPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Column(
+                      child:    EnsureVisible(duration: Duration(milliseconds: 200), ensureVisibleBuilder: (context, focusNode)
+                          =>
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
@@ -50,8 +45,6 @@ class MainPage extends StatelessWidget {
                             style: TextStyle(fontSize: 20.0),
                           ),
                         
-                          EnsureVisible(duration: Duration(milliseconds: 200), ensureVisibleBuilder: (context, focusNode)
-                          =>
                           TextField(focusNode: focusNode,
                             controller: TextEditingController(
                                 text: ModelProvider
@@ -62,9 +55,9 @@ class MainPage extends StatelessWidget {
                             onChanged: (newValue) => ModelProvider
                                 .of(context)
                                 .updateFormEntry(index, newValue),
-                          ))
+                          )
                         ],
-                      ),
+                      ),)
                     );
                   }),
               MaterialButton(

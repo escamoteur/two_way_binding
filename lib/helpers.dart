@@ -40,7 +40,7 @@ class _EnsureVisibleState extends State<EnsureVisible> {
 
     void _ensureVisible() {
         if(_focusNode.hasFocus){
-            new Future.delayed(Duration(milliseconds: 400),()=>
+            new Future.delayed(Duration(milliseconds: 300),()=>
             Scrollable.ensureVisible(context, alignment: widget.alignment,
                 duration: widget.duration, curve: widget.curve));
         

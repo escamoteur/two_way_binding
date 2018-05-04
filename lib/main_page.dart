@@ -36,7 +36,7 @@ class MainPage extends StatelessWidget {
               new Form(key: AppKeys.form,
                     child: 
                     new StreamBuilder<List<FormEntry>>(
-                          stream: ModelProvider.of(context).updateTrigger.stream,
+                          stream: ModelProvider.of(context).listUpdates.stream,
                           initialData: ModelProvider.of(context).formEntries,
                           builder: (context, snapShot)
                           {

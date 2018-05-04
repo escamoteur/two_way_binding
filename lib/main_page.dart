@@ -33,7 +33,7 @@ class MainPageState extends State<MainPage> {
                   child: 
             Column(children: <Widget>
             [
-              Text("Single Text field:"),
+              Text(() {print("************** Was updated****"); return "Single Text field:";}()  ),
 
               TextField( controller:  TextEditingController(text: ModelProvider.of(context).singleFieldValue),
                          onChanged: ModelProvider.of(context).updateSingleValueField),

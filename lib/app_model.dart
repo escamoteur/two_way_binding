@@ -9,7 +9,7 @@ class FormEntry {
   FormEntry(this.title,this.content);
 }
 
-class AppModel extends ChangeNotifier{
+class AppModel {
     List<FormEntry> formEntries = new List<FormEntry>();
 
 
@@ -43,7 +43,7 @@ class AppModel extends ChangeNotifier{
           FormEntry("Country:","New Country"),
         ]);
         printContent();
-      notifyListeners();
+    
     }
 
 

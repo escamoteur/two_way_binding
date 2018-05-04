@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:two_way_binding/app_model.dart';
 import 'package:two_way_binding/helpers.dart';
 import 'package:two_way_binding/keys.dart';
 import 'package:two_way_binding/model_provider.dart';
 
 
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   
+  @override
+  MainPageState createState() {
+    return new MainPageState();
+  }
+}
+
+class MainPageState extends State<MainPage> {
+
+  @override
+  void didChangeDependencies() {
+      ModelProvider.of(context).addListener(() => setState((){}));
+      super.didChangeDependencies();
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +53,7 @@ class MainPage extends StatelessWidget {
                         itemCount: ModelProvider.of(context).formEntries.length,
                         itemBuilder: (context, index) 
                         {
+                            AppModel model = ModelProvider.of(context); 
                             return Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child:    
@@ -50,9 +66,8 @@ class MainPage extends StatelessWidget {
                                          style: TextStyle(fontSize: 20.0),
                                          ),
                                   
-                                    TextFormField(
+                                    TextFormField(controller: new TextEditingController(text: ModelProvider.of(context).formEntries[index].content),
                                         focusNode: focusNode,
-                                        controller: TextEditingController(text: ModelProvider.of(context).formEntries[index].content),
                                         // because a new lambda function is created for each item, it can capture the current value of index
                                         onSaved: (newValue) => ModelProvider.of(context).updateFormEntry(index, newValue),
                                         )
@@ -61,6 +76,10 @@ class MainPage extends StatelessWidget {
                               )
                             );
                           }),
+              ),
+              MaterialButton(
+                child: Text("Update"),
+                onPressed:  ModelProvider.of(context).changeAppModel
               ),
               MaterialButton(
                 child: Text("Print"),

@@ -13,7 +13,7 @@ class FormEntry {
 
 class AppModel {
     List<FormEntry> formEntries = new List<FormEntry>();
-    StreamController<List<FormEntry>> updateTrigger = new StreamController<List<FormEntry>>(); 
+    StreamController<List<FormEntry>> listUpdates = new StreamController<List<FormEntry>>(); 
 
     String singleFieldValue = "Just a single Field";
 
@@ -45,7 +45,7 @@ class AppModel {
           FormEntry("Country:","New Country"),
         ]);
         
-        updateTrigger.add(formEntries);
+        listUpdates.add(formEntries);
     }
 
 

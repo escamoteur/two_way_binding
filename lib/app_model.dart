@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:tuple/tuple.dart';
 
@@ -11,7 +13,7 @@ class FormEntry {
 
 class AppModel {
     List<FormEntry> formEntries = new List<FormEntry>();
-
+    StreamController<List<FormEntry>> updateTrigger = new StreamController<List<FormEntry>>(); 
 
     String singleFieldValue = "Just a single Field";
 
@@ -42,8 +44,8 @@ class AppModel {
           FormEntry("email:","New email"),
           FormEntry("Country:","New Country"),
         ]);
-        printContent();
-    
+        
+        updateTrigger.add(formEntries);
     }
 
 

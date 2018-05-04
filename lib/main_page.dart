@@ -6,21 +6,7 @@ import 'package:two_way_binding/model_provider.dart';
 
 
 
-class MainPage extends StatefulWidget {
-  
-  @override
-  MainPageState createState() {
-    return new MainPageState();
-  }
-}
-
-class MainPageState extends State<MainPage> {
-
-  @override
-  void didChangeDependencies() {
-      ModelProvider.of(context).addListener(() => setState((){}));
-      super.didChangeDependencies();
-    }
+class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +19,7 @@ class MainPageState extends State<MainPage> {
                   child: 
             Column(children: <Widget>
             [
-              Text("Single Text field:"),
+              Text(() {print("************** Was updated****"); return "Single Text field:";}()  ),
 
               TextField( controller:  TextEditingController(text: ModelProvider.of(context).singleFieldValue),
                          onChanged: ModelProvider.of(context).updateSingleValueField),
@@ -49,33 +35,39 @@ class MainPageState extends State<MainPage> {
 
               new Form(key: AppKeys.form,
                     child: 
-                    ColumnBuilder(
-                        itemCount: ModelProvider.of(context).formEntries.length,
-                        itemBuilder: (context, index) 
-                        {
-                            AppModel model = ModelProvider.of(context); 
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child:    
-                              EnsureVisible(duration: Duration(milliseconds: 200), ensureVisibleBuilder: (context, focusNode) =>
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>
-                                  [
-                                    Text(ModelProvider.of(context).formEntries[index].title,
-                                         style: TextStyle(fontSize: 20.0),
-                                         ),
-                                  
-                                    TextFormField(controller: new TextEditingController(text: ModelProvider.of(context).formEntries[index].content),
-                                        focusNode: focusNode,
-                                        // because a new lambda function is created for each item, it can capture the current value of index
-                                        onSaved: (newValue) => ModelProvider.of(context).updateFormEntry(index, newValue),
+                    new StreamBuilder<List<FormEntry>>(
+                          stream: ModelProvider.of(context).updateTrigger.stream,
+                          initialData: ModelProvider.of(context).formEntries,
+                          builder: (context, snapShot)
+                          {
+                            List<FormEntry> list = snapShot.data;
+                            return ColumnBuilder(
+                                  itemCount: ModelProvider.of(context).formEntries.length,
+                                  itemBuilder: (context, index) 
+                                  {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(top: 8.0),
+                                        child:    
+                                        EnsureVisible(duration: Duration(milliseconds: 200), ensureVisibleBuilder: (context, focusNode) =>
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>
+                                            [
+                                              Text(list[index].title,
+                                                  style: TextStyle(fontSize: 20.0),
+                                                  ),
+                                            
+                                              TextFormField(controller: new TextEditingController(text:list[index].content),
+                                                  focusNode: focusNode,
+                                                  // because a new lambda function is created for each item, it can capture the current value of index
+                                                  onSaved: (newValue) => ModelProvider.of(context).updateFormEntry(index, newValue),
+                                                  )
+                                            ],
+                                          ),
                                         )
-                                  ],
-                                ),
-                              )
-                            );
-                          }),
+                                      );
+                                    });},
+                    ),
               ),
               MaterialButton(
                 child: Text("Update"),

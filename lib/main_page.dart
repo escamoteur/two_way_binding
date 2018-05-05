@@ -55,9 +55,12 @@ class MainPage extends StatelessWidget {
                       ),)
                     );
                   }),
-              MaterialButton(
-                child: Text("Print"),
-                onPressed: ModelProvider.of(context).printContent,
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: MaterialButton( color: Theme.of(context).buttonColor,
+                    child: Text("Print"),
+                    onPressed: ModelProvider.of(context).printContent,
+                  ),
               )
             ],
           ),

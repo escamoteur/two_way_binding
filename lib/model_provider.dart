@@ -6,7 +6,7 @@ import 'package:two_way_binding/app_model.dart';
 
 
 // InheritedWidgets allow you to propagate values down the Widget Tree.
-// it can then be accessed by just writing  TheViewModel.of(context)
+// it can then be accessed by just writing  ModelProvider.of(context)
 class ModelProvider extends InheritedWidget {
   final AppModel model;
 

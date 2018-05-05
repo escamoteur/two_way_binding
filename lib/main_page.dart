@@ -14,9 +14,7 @@ class MainPage extends StatelessWidget {
           [
             Text("Single Text field:"),
             TextField(
-                controller: TextEditingController(
-              text: ModelProvider.of(context).singleFieldValue,
-            ),
+                controller: TextEditingController(text: ModelProvider.of(context).singleFieldValue,),
            
             onChanged: ( newValue) => ModelProvider.of(context).singleFieldValue = newValue,
             ),
@@ -34,7 +32,8 @@ class MainPage extends StatelessWidget {
             Expanded(child: 
               ListView.builder(
                   itemCount: ModelProvider.of(context).formEntries.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: (context, index) 
+                  {
                     return Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: 
@@ -45,7 +44,7 @@ class MainPage extends StatelessWidget {
                           Text(
                             ModelProvider.of(context).formEntries[index].title,
                             style: TextStyle(fontSize: 20.0),
-                          ),
+                            ),
                           TextField(
                             controller: TextEditingController(
                                 text: ModelProvider.of(context).formEntries[index].content),
@@ -59,7 +58,7 @@ class MainPage extends StatelessWidget {
                   }),
             ),
 
-            MaterialButton(
+            MaterialButton(color: Theme.of(context).buttonColor,
               child: Text("Print"),
               onPressed: ModelProvider.of(context).printContent,
             )

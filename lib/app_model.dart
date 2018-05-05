@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
-import 'package:tuple/tuple.dart';
 
 
 class FormEntry {
@@ -45,7 +43,7 @@ class AppModel {
           FormEntry("Country:","New Country"),
         ]);
         
-        listUpdates.add(formEntries);
+        listUpdates.add(formEntries); // This will trigger the update
     }
 
 

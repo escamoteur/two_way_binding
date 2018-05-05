@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:two_way_binding/app_model.dart';
 import 'package:two_way_binding/helpers.dart';
 import 'package:two_way_binding/keys.dart';
 import 'package:two_way_binding/model_provider.dart';
@@ -53,7 +52,6 @@ class MainPageState extends State<MainPage> {
                         itemCount: ModelProvider.of(context).formEntries.length,
                         itemBuilder: (context, index) 
                         {
-                            AppModel model = ModelProvider.of(context); 
                             return Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child:    
@@ -77,19 +75,26 @@ class MainPageState extends State<MainPage> {
                             );
                           }),
               ),
-              MaterialButton(
-                child: Text("Update"),
-                onPressed:  ModelProvider.of(context).changeAppModel
+              new Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Row( mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    MaterialButton(color: Theme.of(context).buttonColor, 
+                      child: Text("Update"),
+                      onPressed:  ModelProvider.of(context).changeAppModel
+                    ),
+                    MaterialButton(color: Theme.of(context).buttonColor,
+                      child: Text("Print"),
+                      onPressed: () 
+                            { 
+                              FormState state = AppKeys.form.currentState;
+                              state.save();
+                              ModelProvider.of(context).printContent();
+                            }
+                    )
+                  ],
+                ),
               ),
-              MaterialButton(
-                child: Text("Print"),
-                onPressed: () 
-                      { 
-                         FormState state = AppKeys.form.currentState;
-                         state.save();
-                         ModelProvider.of(context).printContent();
-                      }
-              )
             ],
           ),
         ),

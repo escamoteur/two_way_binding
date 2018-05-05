@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:tuple/tuple.dart';
+
 
 
 class FormEntry {
@@ -42,7 +42,7 @@ class AppModel extends ChangeNotifier{
           FormEntry("email:","New email"),
           FormEntry("Country:","New Country"),
         ]);
-        printContent();
+
       notifyListeners();
     }
 
